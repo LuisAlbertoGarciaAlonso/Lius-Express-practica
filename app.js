@@ -13,9 +13,11 @@
 
 const express = require('express');
 const app = express();
+const bodyParser = requier("body-parser");
+
 require('dotenv').config();
 
-//concecion a base de datos
+//conexion a base de datos
 const mongoose = require('mongoose');
 
 const PORT = process.env.PORT || 3000;

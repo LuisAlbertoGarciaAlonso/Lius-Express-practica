@@ -1,3 +1,5 @@
 node_modules
 /.env
 .env
+*.env
+#supongo que el .env esta en gitignore
