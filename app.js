@@ -11,7 +11,6 @@
 //     console.log('escuchando solucitud');
 // });
 
-
 const express = require('express');
 
 //concecion a base de datos
