@@ -12,14 +12,18 @@
 // });
 
 const express = require('express');
+const app = express();
+require('dotenv').config();
 
 //concecion a base de datos
 const mongoose = require('mongoose');
 
-user = 'MONGOLius';
-const password = 'LIUSMongo327167';
-const dbname = 'veterinaria';
-const uri = `mongodb+srv://${user}:${password}@luisalgar.divye.mongodb.net/${dbname}?retryWrites=true&w=majority` ;
+const PORT = process.env.PORT || 3000;
+//para que no se muestre informacion importante este es un pack para eso configurar el .env
+
+
+//aca estaban los datos del .env
+const uri = `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@luisalgar.divye.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority` ;
 
 mongoose.connect(uri)
 .then(() => {
@@ -27,11 +31,6 @@ mongoose.connect(uri)
 }).catch((err) => {
     console.log(err)
 });
-
-const app = express();
-
-const PORT = process.env.PORT || 3000;
-require('dotenv').config();
 
              //MOTOR DE PLANTILLAS//
 app.set('view engine', 'ejs');
