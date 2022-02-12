@@ -13,7 +13,10 @@
 
 const express = require('express');
 const app = express();
-const bodyParser = requier("body-parser");
+const bodyParser = require("body-parser");
+
+
+
 
 require('dotenv').config();
 
