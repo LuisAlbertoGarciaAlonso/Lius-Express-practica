@@ -49,7 +49,7 @@
         const id = btnEliminar.dataset.id;
         try {
             const data = await fetch(`/mascotas/${id}`, {
-                method: "delete"
+                method: ' delete '
             });
             const res = await data.json();
             console.log(res);
