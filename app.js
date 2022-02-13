@@ -15,8 +15,10 @@ const express = require('express');
 const app = express();
 const bodyParser = require("body-parser");
 
-
-
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+// parse application/json
+app.use(bodyParser.json())
 
 require('dotenv').config();
 
@@ -55,6 +57,7 @@ app.use((req, res, next) => {
         descripcion: 'le pifiaste estoy en view soy 404.ejs'
     });
 });
+
 
 
 app.listen(PORT, () => {

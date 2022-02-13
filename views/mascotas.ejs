@@ -1,6 +1,13 @@
 <%- include("../template/cabecera.ejs", {tituloWeb: 'pagina de inicio' }) %>
 
 <div class="container">
+
+  <h1>Crud mongo</h1>
+  <a class="btn btn-success btn-block my-4" type="submit"
+  href="/mascotas/crear">
+    crear nueva mascota
+</a>
+
   <table class="table table-dark table-hover">
     <thead>
       <tr>
@@ -18,7 +25,9 @@
             <th scope="row"><%= mascota.id %></th>   
             <td><%= mascota.nombre %></td>
             <td><%= mascota.descripcion %></td>
-            <td><%= mascota.id %></td>
+            <td><a href="mascotas/<%= mascota.id %>" class="btn btn-warning btn-sm" type="submit">
+               Editar
+            </a></td>
         </tr> 
 
       <% }) %> <% } %>
