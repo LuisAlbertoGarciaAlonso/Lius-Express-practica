@@ -45,14 +45,18 @@
 
 <script>
     const btnEliminar = document.querySelector('#btnEliminar');
+
     btnEliminar.addEventListener('click', async ()=>{
         const id = btnEliminar.dataset.id;
+        console.log("id",id)
         try {
-            const data = await fetch(`/mascotas/${id}`, {
-                method: ' delete '
+            const data = await fetch(`/mascotas/${id}`,{
+                method: 'delete'
             });
             const res = await data.json();
-            console.log(res);
+            if(res.estado){
+                window.location.href='/mascotas'
+            }
         } catch (error) {
             console.log(error);
         }

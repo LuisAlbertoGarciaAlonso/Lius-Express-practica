@@ -49,23 +49,26 @@ router.get("/:id" ,async (req, res) => {
     }
 });
 
-router.delete('/:id', async (req, res )=>{
+router.delete('/:id', async (req, res) => {
     const id = req.params.id;
+    console.log('id desde backend', id)
     try {
-        const mascotaDB = await mascota.findByIdAndDelete( {_id: id });
-        if (mascotaDB) {
-            res.json({
-                estado: true,
-                mensaje: "eliminado!"
-            });
-        } else {
+        const mascotaDB = await Mascota.findByIdAndDelete({ _id: id });
+        console.log(mascotaDB)
+        if (!mascotaDB) {
             res.json({
                 estado: false,
-                mensaje: "no se pudo eliminar!"
-            });
+                mensaje: 'No se puede eliminar'
+            })
+        } else {
+            res.json({
+                estado: true,
+                mensaje: 'eliminado!'
+            })
         }
+        
     } catch (error) {
-        console.log(error);
+        console.log(error)
     }
 })
 module.exports = router;
