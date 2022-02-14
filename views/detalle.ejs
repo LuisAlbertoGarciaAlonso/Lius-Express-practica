@@ -30,7 +30,10 @@
                 value="<%= mascota.descripcion %>"
                 id="descripcionInput"
             >
-            <button class="btn btn-warning btn-block">
+            <button 
+                class="btn btn-warning btn-block"
+                type="submit"
+            >
                 Editar
             </button>
 
@@ -87,11 +90,17 @@
 
     const formularioEditar = document.querySelector('#formularioEditar');
 
-    formularioEditar.addEventListener('submit', async(e)=>{
+    formularioEditar.addEventListener("submit", async(e)=>{
         e.preventDefault();
-        const nombreInput = formularioEditar.elements['nombre'].value;//esta es una forma
-        const descripcionInput = document.querySelector('#descripcionInput');//esta es otra esta vimo en js de coder.
+
+        const nombreInput = formularioEditar.elements['nombreInput'].value;//esta es una forma
+        console.log(nombreInput)
+
+        const descripcionInput = document.querySelector('#descripcionInput').value;//esta es otra esta vimo en js de coder.
+        console.log(descripcionInput)
+
         const id= formularioEditar.dataset.id;
+        console.log(id);
 
         try {
             const data = await fetch(`/mascotas/${id}`, {
@@ -99,13 +108,19 @@
             headers:{
                 'Content-Type': 'application/json'
             },
-            body : JSON.stringify({nombre: nombre, descripcion: descripcion})//se puede borrar un nombre que tiene el mismo nombre//para pasarlo hay que transformarlo con el json
+            body : JSON.stringify({nombre: nombreInput, descripcion: descripcionInput})//se puede borrar un nombre que tiene el mismo nombre//para pasarlo hay que transformarlo con el json
         });
         const res= await data.json();
 
+        if (res.estado) {
+            window.location.href='/mascotas'
+        } else {
+            console.log(res)
+        };
+
         } catch (error) {
             console.log(error)
-        }
+        };
 
     });
 
