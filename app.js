@@ -48,7 +48,7 @@ app.use(express.static(__dirname + '/public'));//paginas staticas
 
 app.use('/', require('./router/rutasWeb'));
 
-app.use('/mascotas', require('./router/mascotas'));
+app.use('/productos', require('./router/productos'));
 
 //middleware
 app.use((req, res, next) => {

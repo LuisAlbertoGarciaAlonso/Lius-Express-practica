@@ -1,15 +1,15 @@
 const express = require('express');
 const router = express.Router();
 
-const Mascota = require('../models/mascota');
+const Producto = require('../models/producto');
 
 router.get('/', async (req,res)=>{
     try {
-        const arrayMascotasDB = await Mascota.find();
-        console.log(arrayMascotasDB);
+        const arrayProductosDB = await Producto.find();
+        console.log(arrayProductosDB);
 
-        res.render('mascotas',{
-            arrayMascotas : arrayMascotasDB
+        res.render('productos',{
+            arrayProductos : arrayProductosDB
         });
 
     } catch (error) {
@@ -24,9 +24,9 @@ router.get('/crear', (req, res) => {
 router.post('/', async(req, res) =>{
     const body = req.body;
     try {
-        const mascotaDB = new Mascota(body);
-        await mascotaDB.save();
-        res.redirect('/mascotas');
+        const productoDB = new Producto(body);
+        await productoDB.save();
+        res.redirect('/productos');
     } catch (error) {
         console.log(error);
     }
@@ -35,7 +35,7 @@ router.post('/', async(req, res) =>{
 router.get("/:id" ,async (req, res) => {
     const id = req.params.id;
     try {
-        const mascotaDB = await Mascota.findOne({ _id : id });//mongo trabaja co el id con _ entonces hay que darle el valor al id
+        const productoDB = await Producto.findOne({ _id : id });//mongo trabaja co el id con _ entonces hay que darle el valor al id
         
         res.render("detalle",{
             mascota: mascotaDB,
@@ -53,9 +53,9 @@ router.delete('/:id', async (req, res) => {
     const id = req.params.id;
     
     try {
-        const mascotaDB = await Mascota.findByIdAndDelete({ _id: id });
-        console.log(mascotaDB)
-        if (mascotaDB) {
+        const productoDB = await Producto.findByIdAndDelete({ _id: id });
+        console.log(productoDB)
+        if (productoDB) {
             res.json({
                 estado: true,
                 mensaje: 'eliminado!'
@@ -78,7 +78,7 @@ router.put('/:id', async ( req, res )=>{
     const body = req.body;
 
     try {
-        const mascotaDB = await Mascota.findByIdAndUpdate(
+        const productoDB = await Producto.findByIdAndUpdate(
             id, body, {useFindAndModify: false});
             res.json({
                 estado: true,

@@ -1,14 +1,14 @@
-<%- include("../template/cabecera.ejs", {tituloWeb: 'detalle de mascota'})  %>
+<%- include("../template/cabecera.ejs", {tituloWeb: 'Detalle de Productos'})  %>
 
     
     
     <div class="container">
-        <h1>Detalle de mascota</h1>
+        <h1>Detalle de Producto</h1>
         <% if (error) { %>
             <p>
                 <%= mensaje %> 
             </p>
-            <a href="/mascotas" class="btn btn-warning btn-block">Volver a Mascotas</a>
+            <a href="/productos" class="btn btn-warning btn-block">Volver a Productos</a>
         
             <% } %>
     </div>
@@ -20,14 +20,14 @@
                 type="text"
                 class="form-control my-2"
                 name="nombre"
-                value="<%= mascota.nombre %>"
+                value="<%= producto.nombre %>"
                 id="nombreInput"
             >
             <input 
                 type="text"
                 class="form-control my-2"
                 name="descripcion"
-                value="<%= mascota.descripcion %>"
+                value="<%= producto.descripcion %>"
                 id="descripcionInput"
             >
             <button 
@@ -50,13 +50,13 @@
             </thead>
             <tbody>        
                 <tr>
-                    <th scope="row"><%= mascota.id %></th>   
-                    <td><%= mascota.nombre %></td>
-                    <td><%= mascota.descripcion %></td>
+                    <th scope="row"><%= producto.id %></th>   
+                    <td><%= producto.nombre %></td>
+                    <td><%= producto.descripcion %></td>
                     <td><button
                             class="btn btn-danger btn-sm"
                             id="btnEliminar"
-                            data-id="<%= mascota.id %>">
+                            data-id="<%= producto.id %>">
                                 Eliminar
                         </button>
                     </td>
@@ -76,12 +76,12 @@
         const id = btnEliminar.dataset.id;
         console.log("id",id)
         try {
-            const data = await fetch(`/mascotas/${id}`,{
+            const data = await fetch(`/productos/${id}`,{
                 method: 'delete'
             });
             const res = await data.json();
             if(res.estado){
-                window.location.href='/mascotas'
+                window.location.href='/productos'
             }
         } catch (error) {
             console.log(error);
@@ -103,7 +103,7 @@
         console.log(id);
 
         try {
-            const data = await fetch(`/mascotas/${id}`, {
+            const data = await fetch(`/productos/${id}`, {
             method:'put',
             headers:{
                 'Content-Type': 'application/json'
@@ -113,7 +113,7 @@
         const res= await data.json();
 
         if (res.estado) {
-            window.location.href='/mascotas'
+            window.location.href='/productos'
         } else {
             console.log(res)
         };
