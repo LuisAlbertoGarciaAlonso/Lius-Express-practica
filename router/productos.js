@@ -38,7 +38,7 @@ router.get("/:id" ,async (req, res) => {
         const productoDB = await Producto.findOne({ _id : id });//mongo trabaja co el id con _ entonces hay que darle el valor al id
         
         res.render("detalle",{
-            mascota: mascotaDB,
+            producto: productoDB,
             error:false
         })
     } catch (error) {
