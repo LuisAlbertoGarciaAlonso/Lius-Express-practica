@@ -13,14 +13,37 @@
             <% } %>
     </div>
     <% if (!error) { %>
+
+        <form id="formularioEditar" data-id="<%= mascota.id %>">
+            
+            <input 
+                type="text"
+                class="form-control my-2"
+                name="nombre"
+                value="<%= mascota.nombre %>"
+                id="nombreInput"
+            >
+            <input 
+                type="text"
+                class="form-control my-2"
+                name="descripcion"
+                value="<%= mascota.descripcion %>"
+                id="descripcionInput"
+            >
+            <button class="btn btn-warning btn-block">
+                Editar
+            </button>
+
+        </form>
+
         <table class="table table-dark table-hover">
             <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">nombre</th>
-                <th scope="col">descripcion</th>
-                <th scope="col">accion</th>
-              </tr>
+                <tr>
+                    <th scope="col">Id del Producto</th>
+                    <th scope="col">nombre</th>
+                    <th scope="col">descripcion</th>
+                    <th scope="col">accion</th>
+                </tr>
             </thead>
             <tbody>        
                 <tr>
@@ -61,4 +84,30 @@
             console.log(error);
         }
     });
+
+    const formularioEditar = document.querySelector('#formularioEditar');
+
+    formularioEditar.addEventListener('submit', async(e)=>{
+        e.preventDefault();
+        const nombreInput = formularioEditar.elements['nombre'].value;//esta es una forma
+        const descripcionInput = document.querySelector('#descripcionInput');//esta es otra esta vimo en js de coder.
+        const id= formularioEditar.dataset.id;
+
+        try {
+            const data = await fetch(`/mascotas/${id}`, {
+            method:'put',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body : JSON.stringify({nombre: nombre, descripcion: descripcion})//se puede borrar un nombre que tiene el mismo nombre//para pasarlo hay que transformarlo con el json
+        });
+        const res= await data.json();
+
+        } catch (error) {
+            console.log(error)
+        }
+
+    });
+
+
 </script>
